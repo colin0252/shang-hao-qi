@@ -9,17 +9,17 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install XcodeGen
       run: brew install xcodegen
 
     - name: Generate Xcode project
-      run: xcodegen
+      run: cd App && xcodegen
 
     - name: Build app (no signing)
       run: |
-        xcodebuild -project DeltaLogin.xcodeproj \
+        xcodebuild -project App/DeltaLogin.xcodeproj \
           -scheme DeltaLogin \
           -sdk iphoneos \
           -configuration Release \
@@ -36,7 +36,7 @@ jobs:
         zip -r DeltaLogin.ipa Payload
 
     - name: Upload IPA artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: DeltaLogin.ipa
         path: DeltaLogin.ipa
