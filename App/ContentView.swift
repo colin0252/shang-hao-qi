@@ -7,16 +7,8 @@ struct ContentView: View {
     @State private var loginSuccess = false
     
     var body: some View {
-        ZStack {
-            Color(.systemGroupedBackground)
-                .ignoresSafeArea()
-            
+        NavigationView {
             VStack(spacing: 24) {
-                // 顶部留出状态栏空间
-                Color.clear
-                    .frame(height: 1)
-                    .padding(.top, 50)
-                
                 if tokenManager.pendingAuth {
                     HStack {
                         Image(systemName: "exclamationmark.triangle.fill")
@@ -93,8 +85,14 @@ struct ContentView: View {
                 
                 Spacer()
             }
-            .padding(.bottom)
+            .padding(.top)
+            .navigationTitle("Delta 登录助手")
+            .background(
+                Color(.systemGroupedBackground)
+                    .ignoresSafeArea()
+            )
         }
+        .navigationViewStyle(.stack)
         .animation(.easeInOut, value: showSaveSuccess)
         .animation(.easeInOut, value: loginSuccess)
     }
