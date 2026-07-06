@@ -7,7 +7,10 @@ struct ContentView: View {
     @State private var loginSuccess = false
     
     var body: some View {
-        NavigationView {
+        ZStack {
+            Color(.systemGroupedBackground)
+                .ignoresSafeArea()
+            
             VStack(spacing: 24) {
                 if tokenManager.pendingAuth {
                     HStack {
@@ -85,15 +88,15 @@ struct ContentView: View {
                 
                 Spacer()
             }
-            .padding(.top)
-            .navigationTitle("Delta 登录助手")
-            .animation(.easeInOut, value: showSaveSuccess)
-            .animation(.easeInOut, value: loginSuccess)
+            .padding(.top, 60)
         }
+        .navigationTitle("Delta 登录助手")
+        .navigationBarHidden(true)
+        .animation(.easeInOut, value: showSaveSuccess)
+        .animation(.easeInOut, value: loginSuccess)
     }
     
     private func performLogin() {
-        // callbackScheme 为非可选 String，直接判断空值
         let callback = tokenManager.callbackScheme
         if callback.isEmpty {
             loginSuccess = true
@@ -101,7 +104,6 @@ struct ContentView: View {
             return
         }
         
-        // 构造回跳 URL，模拟 QQ 授权成功
         var components = URLComponents()
         components.scheme = callback
         components.host = "oauth"
