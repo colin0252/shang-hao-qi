@@ -93,12 +93,15 @@ struct ContentView: View {
     }
     
     private func performLogin() {
-        guard let callback = tokenManager.callbackScheme, !callback.isEmpty else {
+        // callbackScheme 为非可选 String，直接判断空值
+        let callback = tokenManager.callbackScheme
+        if callback.isEmpty {
             loginSuccess = true
             tokenManager.pendingAuth = false
             return
         }
         
+        // 构造回跳 URL，模拟 QQ 授权成功
         var components = URLComponents()
         components.scheme = callback
         components.host = "oauth"
