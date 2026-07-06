@@ -2,31 +2,48 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- 保留你原有的 CFBundleExecutable 和 CFBundleIdentifier，不要改动下面这 2 行 -->
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Delta 登录助手</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	
-	<!-- ========== 以下为新增/修改的核心修复项 ========== -->
-	<!-- 1. 强制指定启动故事板（名字必须与文件对应） -->
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	
-	<!-- 2. 删除下面这整个 UILaunchImages 数组（如果有的话），没有则忽略 -->
-	<!-- 
-	<key>UILaunchImages</key>
-	<array>...</array>
-	-->
-	
-	<!-- 3. 确保支持所有屏幕方向（全屏基础） -->
-	<key>UISupportedInterfaceOrientations~iphone</key>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string></string>
+	</dict>
+	<key>CFBundleURLTypes</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.fake.qq</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mqq</string>
+			</array>
+		</dict>
 	</array>
-	
-	<!-- 你原有的其他 Key（如版本号、权限等）全部照原样保留，不要删除 -->
 </dict>
 </plist>
