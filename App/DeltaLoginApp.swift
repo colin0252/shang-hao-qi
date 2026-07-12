@@ -6,11 +6,15 @@ struct DeltaLoginApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(tokenManager)
-                .onOpenURL { url in
-                    handleIncomingURL(url, tokenManager: tokenManager)
-                }
+            NavigationView {
+                ContentView()
+                    .environmentObject(tokenManager)
+            }
+            .navigationViewStyle(.stack)
+            .ignoresSafeArea(.all)          // 关键：全面屏铺满
+            .onOpenURL { url in
+                handleIncomingURL(url, tokenManager: tokenManager)
+            }
         }
     }
     
@@ -18,8 +22,8 @@ struct DeltaLoginApp: App {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               components.scheme == "mqq" else { return }
         
-        if let callbackScheme = components.queryItems?.first(where: { $0.name == "callback" })?.value {
-            tokenManager.callbackScheme = callbackScheme
+        if let callback = components.queryItems?.first(where: { $0.name == "callback" })?.value {
+            tokenManager.callbackScheme = callback
         }
         tokenManager.pendingAuth = true
     }
