@@ -35,8 +35,18 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColor</key>
+		<dict>
+			<key>Red</key>
+			<real>0.9490196078431372</real>
+			<key>Green</key>
+			<real>0.9490196078431372</real>
+			<key>Blue</key>
+			<real>0.9686274509803922</real>
+		</dict>
+	</dict>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
