@@ -12,7 +12,6 @@ struct DeltaLoginApp: App {
                     handleIncomingURL(url, tokenManager: tokenManager)
                 }
         }
-        .ignoresSafeArea(.all)   // 关键：让窗口忽略所有安全区，强制全屏
     }
     
     private func handleIncomingURL(_ url: URL, tokenManager: TokenManager) {
