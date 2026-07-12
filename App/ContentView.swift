@@ -93,6 +93,7 @@ struct ContentView: View {
             )
         }
         .navigationViewStyle(.stack)
+        .ignoresSafeArea(.all)   // 额外保险：让 NavigationView 也忽略安全区
         .animation(.easeInOut, value: showSaveSuccess)
         .animation(.easeInOut, value: loginSuccess)
     }
