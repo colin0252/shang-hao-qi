@@ -1,15 +1,13 @@
 import SwiftUI
 
 class TokenManager: ObservableObject {
-    @Published var savedToken: String = ""
-    @Published var pendingAuth: Bool = false
-    @Published var callbackScheme: String = ""
+    @Published var savedToken = ""
+    @Published var pendingAuth = false
+    @Published var callbackScheme = ""
     
     private let tokenKey = "com.delta.login.token"
     
-    init() {
-        loadToken()
-    }
+    init() { loadToken() }
     
     func saveToken(_ token: String) {
         savedToken = token
