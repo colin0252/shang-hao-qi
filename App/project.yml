@@ -12,8 +12,6 @@ targets:
         type: group
         includes:
           - "*.swift"
-    resources:
-      - path: Base.lproj/LaunchScreen.storyboard
     settings:
       base:
         INFOPLIST_FILE: Info.plist
