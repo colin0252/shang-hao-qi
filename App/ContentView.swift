@@ -9,12 +9,10 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // 背景铺满全屏
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 24) {
-                    // 根据设备安全区动态留出顶部空间（状态栏+刘海）
                     Spacer()
                         .frame(height: geometry.safeAreaInsets.top)
                     
@@ -85,4 +83,47 @@ struct ContentView: View {
                     }
                     
                     if loginSuccess {
-                        Text("已尝试回跳
+                        Text("已尝试回跳至三角洲，请返回游戏")
+                            .foregroundColor(.blue)
+                            .padding()
+                            .background(Color.blue.opacity(0.1))
+                            .cornerRadius(8)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.bottom, geometry.safeAreaInsets.bottom)
+            }
+        }
+        .ignoresSafeArea()
+        .animation(.easeInOut, value: showSaveSuccess)
+        .animation(.easeInOut, value: loginSuccess)
+    }
+    
+    private func performLogin() {
+        let callback = tokenManager.callbackScheme
+        if callback.isEmpty {
+            loginSuccess = true
+            tokenManager.pendingAuth = false
+            return
+        }
+        
+        var components = URLComponents()
+        components.scheme = callback
+        components.host = "oauth"
+        components.queryItems = [
+            URLQueryItem(name: "access_token", value: tokenManager.savedToken),
+            URLQueryItem(name: "openid", value: "delta_fake_openid"),
+            URLQueryItem(name: "expires_in", value: "7200")
+        ]
+        
+        if let url = components.url {
+            UIApplication.shared.open(url) { success in
+                if success {
+                    loginSuccess = true
+                    tokenManager.pendingAuth = false
+                }
+            }
+        }
+    }
+}
