@@ -7,15 +7,12 @@ struct ContentView: View {
     @State private var loginSuccess = false
     
     var body: some View {
-        GeometryReader { geometry in
+        NavigationView {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 24) {
-                    Spacer()
-                        .frame(height: geometry.safeAreaInsets.top)
-                    
                     if tokenManager.pendingAuth {
                         HStack {
                             Image(systemName: "exclamationmark.triangle.fill")
@@ -92,10 +89,12 @@ struct ContentView: View {
                     
                     Spacer()
                 }
-                .padding(.bottom, geometry.safeAreaInsets.bottom)
+                .padding(.top)
+                .navigationTitle("Delta 登录助手")
             }
         }
-        .ignoresSafeArea()
+        .navigationViewStyle(.stack)
+        .ignoresSafeArea(.all)
         .animation(.easeInOut, value: showSaveSuccess)
         .animation(.easeInOut, value: loginSuccess)
     }
