@@ -2,7 +2,7 @@ name: DeltaLogin
 options:
   bundleIdPrefix: com.fake
   deploymentTarget:
-    iOS: "15.0"
+    iOS: "16.0"                      # 对齐成功案例的 16.0
 targets:
   DeltaLogin:
     type: application
@@ -13,13 +13,14 @@ targets:
         includes:
           - "*.swift"
     resources:
-      - path: Base.lproj/LaunchScreen.storyboard   # ← 必须添加，否则 storyboard 不会被打包
+      - path: Base.lproj/LaunchScreen.storyboard   # 编译 LaunchScreen.storyboard
     settings:
       base:
         INFOPLIST_FILE: Info.plist
         CODE_SIGN_IDENTITY: ""
         CODE_SIGNING_REQUIRED: NO
         CODE_SIGNING_ALLOWED: NO
-        TARGETED_DEVICE_FAMILY: "1,2"             # ← 与成功案例保持一致
+        TARGETED_DEVICE_FAMILY: "1,2"               # 与成功案例完全一致
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"           # 明确设置
     info:
       path: Info.plist
