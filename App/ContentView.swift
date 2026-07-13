@@ -5,12 +5,12 @@ struct ContentView: View {
     @State private var inputToken = ""
     @State private var showSaveSuccess = false
     @State private var loginSuccess = false
-    
+
     var body: some View {
         ZStack {
             Color(.systemGroupedBackground)
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 24) {
                 if tokenManager.pendingAuth {
                     HStack {
@@ -23,7 +23,7 @@ struct ContentView: View {
                     .background(Color.orange.opacity(0.15))
                     .cornerRadius(10)
                 }
-                
+
                 VStack(alignment: .leading, spacing: 8) {
                     Text("登录 Token")
                         .font(.subheadline)
@@ -34,7 +34,7 @@ struct ContentView: View {
                         .disableAutocorrection(true)
                 }
                 .padding(.horizontal)
-                
+
                 HStack(spacing: 16) {
                     Button {
                         guard !inputToken.trimmingCharacters(in: .whitespaces).isEmpty else { return }
@@ -47,7 +47,7 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
-                    
+
                     Button {
                         guard !tokenManager.savedToken.isEmpty else { return }
                         performLogin()
@@ -59,7 +59,7 @@ struct ContentView: View {
                     .disabled(tokenManager.savedToken.isEmpty)
                 }
                 .padding(.horizontal)
-                
+
                 if !tokenManager.savedToken.isEmpty {
                     HStack {
                         Image(systemName: "key.fill")
@@ -69,12 +69,12 @@ struct ContentView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                
+
                 if showSaveSuccess {
                     Text("Token 保存成功")
                         .foregroundColor(.green)
                 }
-                
+
                 if loginSuccess {
                     Text("已尝试回跳至三角洲，请返回游戏")
                         .foregroundColor(.blue)
@@ -82,7 +82,7 @@ struct ContentView: View {
                         .background(Color.blue.opacity(0.1))
                         .cornerRadius(8)
                 }
-                
+
                 Spacer()
             }
             .padding(.top)
@@ -91,7 +91,7 @@ struct ContentView: View {
         .animation(.easeInOut, value: showSaveSuccess)
         .animation(.easeInOut, value: loginSuccess)
     }
-    
+
     private func performLogin() {
         let callback = tokenManager.callbackScheme
         guard !callback.isEmpty else {
@@ -99,7 +99,7 @@ struct ContentView: View {
             tokenManager.pendingAuth = false
             return
         }
-        
+
         var components = URLComponents()
         components.scheme = callback
         components.host = "oauth"
@@ -108,7 +108,7 @@ struct ContentView: View {
             URLQueryItem(name: "openid", value: "delta_fake_openid"),
             URLQueryItem(name: "expires_in", value: "7200")
         ]
-        
+
         if let url = components.url {
             UIApplication.shared.open(url) { success in
                 if success {
