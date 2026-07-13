@@ -12,12 +12,14 @@ targets:
         type: group
         includes:
           - "*.swift"
+    resources:
+      - path: Base.lproj/LaunchScreen.storyboard   # ← 必须添加，否则 storyboard 不会被打包
     settings:
       base:
         INFOPLIST_FILE: Info.plist
         CODE_SIGN_IDENTITY: ""
         CODE_SIGNING_REQUIRED: NO
         CODE_SIGNING_ALLOWED: NO
-        TARGETED_DEVICE_FAMILY: "1"
+        TARGETED_DEVICE_FAMILY: "1,2"             # ← 与成功案例保持一致
     info:
       path: Info.plist
