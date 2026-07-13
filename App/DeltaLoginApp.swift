@@ -11,7 +11,7 @@ struct DeltaLoginApp: App {
                     .environmentObject(tokenManager)
             }
             .navigationViewStyle(.stack)
-            .ignoresSafeArea(.all)          // 关键：全面屏铺满
+            .ignoresSafeArea(.all)          // ← 关键：全面屏铺满
             .onOpenURL { url in
                 handleIncomingURL(url, tokenManager: tokenManager)
             }
